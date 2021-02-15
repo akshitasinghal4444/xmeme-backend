@@ -13,25 +13,29 @@ app.use(express.json())
 
 const PORT=8081;
 
-const db = mysql.createConnection({
-    host: 'sql12.freemysqlhosting.net',
-    user: 'sql12393087',
-    password: 'wp7P7ijbnm',
-    database: 'sql12393087'
-});
+app.get('/',(req,res)=>{
+    res.send("hello");
+}
+
+// const db = mysql.createConnection({
+//     host: 'sql12.freemysqlhosting.net',
+//     user: 'sql12393087',
+//     password: 'wp7P7ijbnm',
+//     database: 'sql12393087'
+// });
 
 
-db.connect(function (err) {
-    if (err) console.log(err);
-    else console.log("connected !!");
-    const sqlRetrieve = "select * from details order by id DESC limit 100";
-    db.query(sqlRetrieve, (err, result) => {
-        if (err)
-            console.log(err);
-        else
-            console.log(result);
-            // res.send(result);
-    })
+// db.connect(function (err) {
+//     if (err) console.log(err);
+//     else console.log("connected !!");
+//     const sqlRetrieve = "select * from details order by id DESC limit 100";
+//     db.query(sqlRetrieve, (err, result) => {
+//         if (err)
+//             console.log(err);
+//         else
+//             console.log(result);
+//             // res.send(result);
+//     })
 
 
 //     app.post('/memes', (req, res) => {
