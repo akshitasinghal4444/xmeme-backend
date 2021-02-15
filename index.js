@@ -1,3 +1,4 @@
+
 const express = require('express')
 const mysql = require('mysql')
 const cors = require('cors')
@@ -11,17 +12,28 @@ app.use(bodyParser.json())
 app.use(cors());
 app.use(express.json())
 
+const PORT=8081;
+
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'xmeme'
+    host: 'sql12.freemysqlhosting.net',
+    user: 'sql12393087',
+    password: 'wp7P7ijbnm',
+    database: 'sql12393087'
 });
 
 
 db.connect(function (err) {
     if (err) console.log(err);
     else console.log("connected !!");
+    const sqlRetrieve = "select * from details order by id DESC limit 100";
+    db.query(sqlRetrieve, (err, result) => {
+        if (err)
+            console.log(err);
+        else
+            console.log(result);
+            // res.send(result);
+    })
+
 
     app.post('/memes', (req, res) => {
 
@@ -79,7 +91,7 @@ db.connect(function (err) {
             if (err)
                 console.log(err);
             else
-                // console.log(result);
+                console.log(result);
                 res.send(result);
         })
 
@@ -139,6 +151,6 @@ db.connect(function (err) {
 
 
 
-app.listen(8081, () => {
-    console.log("Running on port 8081");
+app.listen(process.env.PORT || PORT, () => {
+    console.log("Running on port "+ PORT);
 })
